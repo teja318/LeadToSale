@@ -1,0 +1,13 @@
+<%= form_for(@stage) do |f| %>
+<%= f.label :Name %>
+<%= f.text_field :name %></br>
+<%= f.label :Description %>
+<%= f.text_area :description %></br>
+<%= f.label :Interest_level %>
+<%= f.radio_button :interest_level, 5 %> 5  
+<%= f.radio_button :interest_level, 4 %> 4  
+<%= f.radio_button :interest_level, 3 %> 3  
+<%= f.radio_button :interest_level, 2 %> 2  
+<%= f.radio_button :interest_level, 1 %> 1 <br> 
+<%= f.submit "submit" %>
+<%end%>

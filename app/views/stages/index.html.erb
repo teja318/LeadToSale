@@ -1,0 +1,10 @@
+<h2>Listing stages</h2>
+<% @stages.each do |stage| %>
+Name : <%= stage.name %></br>
+Description : <%= stage.description %></br>
+Interest_Level : <%= stage.interest_level %></br>
+<%= link_to "show", stage %></br>
+
+<%end%>
+<%= link_to "ADD Stages", new_stage_path %>
+
