@@ -1,0 +1,14 @@
+<%= form_for(@prospect) do |f| %>
+<%= f.label :FullName, 'Full Name' %>
+<%= f.text_field :full_name %></br>
+<%= f.label :Email %>
+<%= f.text_field :email %></br>
+<%= f.label :Phone %>
+<%= f.text_field :phone %></br>
+<%= f.label :Location %>
+<%= f.text_field :location %></br>
+<%= f.label :Stage %>
+<%= f.collection_select :stage_id, Stage.all,:id, :name, prompt: "Select Stage"%></br>
+<%= f.label :Managed_by %>
+<%= f.text_field :managed_by %></br>
+<%end%>

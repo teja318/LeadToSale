@@ -1,0 +1,10 @@
+<h2>Listing Prospects</h2>
+<% @prospects.each do |prospect| %>
+<%= prospect.full_name %>
+<%= prospect.email %>
+<%= prospect.phone %>
+<%= prospect.location %>
+<%= prospect.stage_id %>
+<%= prospect.managed_by %>
+<%end%>
+<%= link_to "ADD Prospect", new_prospect_path %>
