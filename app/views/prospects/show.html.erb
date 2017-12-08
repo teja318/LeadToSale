@@ -1,0 +1,13 @@
+Full Name :<%= @prospect.full_name %></br>
+Email :<%= @prospect.email %></br>
+Phone : <%= @prospect.phone %></br>
+Location : <%= @prospect.location %></br>
+Stage <%= @prospect.stage.name %></br>
+Managed_by :<%= @prospect.managed_by %></br>
+<% if can? :update, @prospect %>
+<%= link_to 'Edit', edit_prospect_path(@prospect.id) %>
+<%end%>
+<% if can? :destroy, @prospect %>
+<%= link_to 'Destroy', @prospect, method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>
+<%= link_to 'Back', prospects_path %>

@@ -1,7 +1,11 @@
 class RolesController < ApplicationController
+   
+      
+   before_action :authenticate_user!, except: [:index, :show]
 
-
-	def index
+   load_and_authorize_resource
+	
+    def index
      @roles = Role.all
     end
 

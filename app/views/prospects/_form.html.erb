@@ -9,6 +9,7 @@
 <%= f.text_field :location %></br>
 <%= f.label :Stage %>
 <%= f.collection_select :stage_id, Stage.all,:id, :name, prompt: "Select Stage"%></br>
-<%= f.label :Managed_by %>
-<%= f.text_field :managed_by %></br>
+<%#= f.label :Managed_by %>
+<%#= f.text_field :managed_by %></br>
+<%= f.submit 'submit' %>
 <%end%>

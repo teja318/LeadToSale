@@ -11,4 +11,9 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: [:full_name, :phone, :role_id])
   end
 
+  rescue_from CanCan::AccessDenied do 
+  redirect_to root_path, notice: "Page not found"
+  end
+
+
 end

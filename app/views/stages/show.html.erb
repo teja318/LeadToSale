@@ -1,5 +1,10 @@
 Name :<%= @stage.name %></br>
 Description : <%= @stage.description %></br>
 InterestLevel :<%= @stage.interest_level %></br>
-<%= link_to "Edit", edit_stage_path(@stage.id) %>
+<% if can? :update, @prospect %>
+<%= link_to "Edit", edit_stage_path(@stage.id) %> | 
+<%end%>
+<% if can? :destroy, @stage %>
+<%= link_to 'Destroy', @stage, method: :delete, data: { confirm: 'Are you sure?' } %></br>
+<% end %>
 <%=link_to "Listing Stages", stages_path %>

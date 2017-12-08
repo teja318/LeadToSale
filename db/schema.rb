@@ -11,12 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171207102801) do
+ActiveRecord::Schema.define(version: 20171208123604) do
+
+  create_table "customers", force: :cascade do |t|
+    t.string   "full_name"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "location"
+    t.integer  "managed_by"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "prospects", force: :cascade do |t|
     t.string   "full_name"
     t.string   "email"
-    t.integer  "phone"
+    t.string   "phone"
     t.string   "location"
     t.integer  "stage_id"
     t.integer  "managed_by"
@@ -42,7 +52,7 @@ ActiveRecord::Schema.define(version: 20171207102801) do
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "full_name"
-    t.integer  "phone"
+    t.string   "phone"
     t.integer  "role_id"
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"

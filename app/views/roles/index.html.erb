@@ -3,5 +3,6 @@
 <%= role.name  %></br>
 <%= link_to "show", role %></br>
 <%end%>
-
+<% if can? :create, Role.new %>
 <%= link_to 'ADD Roles', new_role_path %>
+<%end%>

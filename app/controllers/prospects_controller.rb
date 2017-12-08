@@ -1,7 +1,15 @@
 class ProspectsController < ApplicationController
+    
 
-	def index 
-	 @prospects = Prospect.all
+
+   before_action :authenticate_user!, except: [:index, :show]
+   # this is to check if the action is made available to user
+   load_and_authorize_resource
+   
+	def index
+      #@prospects = Prospect.all 
+
+	 @prospects = Prospect.where("managed_by = ?", current_user.id)
 	end
 
 	def new 
@@ -10,6 +18,7 @@ class ProspectsController < ApplicationController
 	
 	def create 
 	 @prospect = Prospect.new(prospect_params)
+	 @prospect.managed_by = current_user.id
 	 if @prospect.save
 	 redirect_to prospects_path, notice: "Successfully added prospect"
      else

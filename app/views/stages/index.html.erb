@@ -6,5 +6,6 @@ Interest_Level : <%= stage.interest_level %></br>
 <%= link_to "show", stage %></br>
 
 <%end%>
+<% if can? :create, Stage.new %>
 <%= link_to "ADD Stages", new_stage_path %>
-
+<%end%>

@@ -1,10 +1,13 @@
 <h2>Listing Prospects</h2>
 <% @prospects.each do |prospect| %>
-<%= prospect.full_name %>
-<%= prospect.email %>
-<%= prospect.phone %>
-<%= prospect.location %>
-<%= prospect.stage_id %>
-<%= prospect.managed_by %>
+Full Name :<%= prospect.full_name %></br>
+Email :<%= prospect.email %></br>
+Phone : <%= prospect.phone %></br>
+Location : <%= prospect.location %></br>
+Stage : <%= prospect.stage.name %></br>
+Managed_by : <%= prospect.user.full_name %></br>
+<%= link_to 'show', prospect %></br>
 <%end%>
+<% if can? :create, Prospect.new %>
 <%= link_to "ADD Prospect", new_prospect_path %>
+<%end%>

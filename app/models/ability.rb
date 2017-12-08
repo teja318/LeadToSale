@@ -4,13 +4,12 @@ class Ability
  
     def initialize(user)
 
-    if user.role? "sales manager"
+    if user.nil?
+        can :read, :all
+    elsif user.role? ("sales manager")
         can :manage, :all
-        
-    elsif user.role? "sales associate"
-        can [:read,:create, :update, :edit], [:prospect]
-        
-    end
+    elsif user.role? ("sales associate")
+        can [:read, :create, :update], Prospect
     end
 
 
