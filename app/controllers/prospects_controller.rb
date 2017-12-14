@@ -2,14 +2,17 @@ class ProspectsController < ApplicationController
     
 
 
-   before_action :authenticate_user!, except: [:index, :show]
-   # this is to check if the action is made available to user
+   before_action :authenticate_user!
+   
    load_and_authorize_resource
    
 	def index
-      #@prospects = Prospect.all 
-
-	 @prospects = Prospect.where("managed_by = ?", current_user.id)
+      if current_user.role?("sales manager")
+        @prospects = Prospect.all
+      else
+        @prospects = current_user.prospects
+      end
+      @prospect = Prospect.new
 	end
 
 	def new 
@@ -19,11 +22,19 @@ class ProspectsController < ApplicationController
 	def create 
 	 @prospect = Prospect.new(prospect_params)
 	 @prospect.managed_by = current_user.id
-	 if @prospect.save
-	 redirect_to prospects_path, notice: "Successfully added prospect"
-     else
-	 render action: "new"
-	 end
+      respond_to do |format|
+       if @prospect.save
+      format.html { redirect_to prospects_path, notice: 'prospect was successfully created.' }
+        format.js
+      else
+        format.js
+      end
+      end
+	 # if @prospect.save
+	 # redirect_to prospects_path, notice: "Successfully added prospect"
+  #    else
+	 # render action: "new"
+	 # end
     end
 
     def edit
@@ -33,7 +44,7 @@ class ProspectsController < ApplicationController
     def update
      @prospect = Prospect.find(params[:id])
      if @prospect.update_attributes(prospect_params)
-     redirect_to prospect_path(@prospect.id),notice: "Successfully updated prospect" 
+     redirect_to prospects_path,notice: "Successfully updated prospect" 
      else
      render action: "edit"
      end

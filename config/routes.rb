@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
 
-  devise_for :users
+  #devise_for :users,:path_prefix => 'd'
+  resources :users
+  devise_for :users, :path_prefix => 'd', :skip => [:registrations] 
+  as :user do
+  get 'users/edit' => 'devise/registrations#edit', :as => 'edit_user_registration'
+  put 'users' => 'devise/registrations#update', :as => 'user_registration'
+  end
+
+  resources :customers
   resources :roles
   resources :stages
   resources :prospects
@@ -8,7 +16,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-   root 'stages#index'
+   root 'prospects#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

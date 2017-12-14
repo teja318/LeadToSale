@@ -1,15 +1,131 @@
-<%= form_for(@prospect) do |f| %>
+<%= form_for(@prospect,remote: true)  do |f| %>
+<div class="form-group">
 <%= f.label :FullName, 'Full Name' %>
-<%= f.text_field :full_name %></br>
+<%= f.text_field :full_name ,class: "form-control"%></br>
+ <span id="full_nameError"></span>
+</div>
+
+<div class="form-group">
 <%= f.label :Email %>
-<%= f.text_field :email %></br>
+<%= f.text_field :email ,class: "form-control"%></br>
+ <span id="emailError"></span>
+</div>
+
+<div class="form-group">
 <%= f.label :Phone %>
-<%= f.text_field :phone %></br>
+<%= f.text_field :phone,class: "form-control" %></br>
+ <span id="phoneError"></span>
+</div>
+
+<div class="form-group">
 <%= f.label :Location %>
-<%= f.text_field :location %></br>
-<%= f.label :Stage %>
-<%= f.collection_select :stage_id, Stage.all,:id, :name, prompt: "Select Stage"%></br>
-<%#= f.label :Managed_by %>
-<%#= f.text_field :managed_by %></br>
-<%= f.submit 'submit' %>
+<%= f.text_field :location,class: "form-control" %></br>
+ <span id="locationError"></span>
+</div>
+
+<div class="actions"  id="submit">
+<%= f.submit "submit", class: "btn btn-primary" %>
+</div>  
 <%end%>
+<script>  
+   var alphabetFormatter = /^[A-Za-z]+$/;
+   var emailFormatter = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+  
+   var phoneFormatter = /^[0-9]+$/;
+   
+ var fullnameHandle = document.getElementById('prospect_full_name');
+ var emailHandle = document.getElementById('prospect_email');
+ var phoneHandle = document.getElementById('prospect_phone'); 
+ var locationHandle = document.getElementById('prospect_location');
+  
+
+  var fullnameErrorHandle = document.getElementById('full_nameError');
+  var emailErrorHandle = document.getElementById('emailError');
+  var phoneErrorHandle = document.getElementById('phoneError');
+  var loactionErrorHandle = document.getElementById('loactionError');
+  
+  
+    
+    validate = {
+          "full_name": false,
+          "email": false,
+          "phone": false,
+          "loaction": false
+          
+
+          }
+     function validateFullName(){
+        if(fullnameHandle.value == "") {
+        fullnameErrorHandle.innerHTML = "Can't be blank";
+          validate.full_name = false;
+       }else if(!alphabetFormatter.test(fullnameHandle.value)) {
+           fullnameErrorHandle.innerHTML = "Should only be alphabets";
+           validate.full_name = false;
+         }else{
+          fullnameErrorHandle.innerHTML = "";
+          validate.full_name = true; 
+         } 
+     }   
+
+     function validateEmail(){
+      if (emailHandle.value== "") {
+      emailErrorHandle.innerHTML = "Cant be blank"; 
+         validate.email = false;
+      }else if (!emailFormatter.test(emailHandle.value)) {
+      emailErrorHandle.innerHTML = "should a valid format";
+          validate.email = false;
+      } else {
+          emailErrorHandle.innerHTML = "";
+           validate.email = true;
+      }
+     }  
+
+     function validatePhone(){
+       if (phoneHandle.value== "") {
+       phoneErrorHandle.innerHTML = "Cant be blank";
+             validate.phone = false;
+       }else if (!phoneFormatter.test(phoneHandle.value)){
+        phoneErrorHandle.innerHTML = "should be a number";
+            validate.phone = false;
+       }else if (phoneHandle.value.length !== 10) {
+        phoneErrorHandle.innerHTML = "should be 10 digits";
+             validate.phone = false;
+      }else{
+        phoneErrorHandle.innerHTML = "";
+            validate.phone = true;
+      }
+     }
+
+     function validateLocation(){
+      if(locationHandle.value == "") {
+        locationErrorHandle.innerHTML = "Can't be blank";
+          validate.loaction = false;
+       }else if(!alphabetFormatter.test(locationHandle.value)) {
+           locationErrorHandle.innerHTML = "Should only be alphabets";
+           validate.loaction = false;
+         }else{
+          locationErrorHandle.innerHTML = "";
+          validate.loaction = true; 
+         } 
+    }
+  
+    
+
+   var formHandle = document.getElementById('new_prospect');
+   formHandle.addEventListener('submit', function(e){
+     validateFullName();
+     validateEmail();
+     validatePhone();
+     validateLocation();
+     
+     if(Object.values(validate).includes(false)){
+       e.preventDefault();
+       console.log("validate exist")
+     }
+
+     },false);
+
+   
+
+
+   </script>

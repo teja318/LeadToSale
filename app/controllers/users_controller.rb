@@ -1,7 +1,10 @@
 class UsersController < ApplicationController
 
+  
+  load_and_authorize_resource
  def index
  @users = User.all
+ @user = User.new
  end
 
  def new
@@ -10,12 +13,19 @@ class UsersController < ApplicationController
 
  def create
   @user = User.new(user_params)
-  
-  if @user.save
-  redirect_to users_path, notice: "Successfully added user "
-  else
-  render action: "new"
+  respond_to do |format|
+   if @user.save
+    format.html { redirect_to users_path, notice: 'user was successfully created.' }
+        format.js
+      else
+        format.js
+   end
   end
+  # if @user.save
+  # redirect_to users_path, notice: "Successfully added user "
+  # else
+  # render action: "new"
+  # end
  end
 
  def edit
@@ -41,5 +51,11 @@ class UsersController < ApplicationController
  redirect_to users_path,notice: "Successfully updated user "
  end
 
+  private
+ def user_params
+  params[:user].permit(:full_name, :email, :phone, :role_id,:password, :password_confirmation) 
+ end
+
+ 
 
 end

@@ -1,10 +1,29 @@
-Name :<%= @stage.name %></br>
-Description : <%= @stage.description %></br>
-InterestLevel :<%= @stage.interest_level %></br>
-<% if can? :update, @prospect %>
-<%= link_to "Edit", edit_stage_path(@stage.id) %> | 
-<%end%>
-<% if can? :destroy, @stage %>
-<%= link_to 'Destroy', @stage, method: :delete, data: { confirm: 'Are you sure?' } %></br>
-<% end %>
-<%=link_to "Listing Stages", stages_path %>
+<div class="row">
+  <div class="col-md-8">
+     <div class="page-header">
+       <h2> Name : <%= @stage.name %>
+        <% if can? :update, @prospect %>
+		<%= link_to "Edit", edit_stage_path(@stage.id),class: "btn btn-info pull-right" %> 
+		<%end%>
+		<% if can? :destroy, @stage %>
+		<%= link_to 'Destroy', @stage, method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-danger pull-right"  %>
+		<% end %>
+		</h2>
+     </div>  
+     Description : <%= @stage.description %></br>
+     InterestLevel :<%= @stage.interest_level %></br>
+
+     <%=link_to "Back", stages_path ,class:"btn btn-primary" %>
+  </div>
+
+  <div class="col-md-4">
+     <div class="page-header">
+         <h2>Trending </h2>
+     </div>
+     
+  </div>
+</div>
+
+
+
+

@@ -1,13 +1,59 @@
-<h2>Listing Prospects</h2>
-<% @prospects.each do |prospect| %>
-Full Name :<%= prospect.full_name %></br>
-Email :<%= prospect.email %></br>
-Phone : <%= prospect.phone %></br>
-Location : <%= prospect.location %></br>
-Stage : <%= prospect.stage.name %></br>
-Managed_by : <%= prospect.user.full_name %></br>
-<%= link_to 'show', prospect %></br>
-<%end%>
-<% if can? :create, Prospect.new %>
-<%= link_to "ADD Prospect", new_prospect_path %>
-<%end%>
+<div class="row" >
+  <div class="col-md-8">
+      <div class="page-header">
+        <h2>Listing Prospects</h2>
+     </div>
+
+    <table class="table table-bordered" id="prospectList">
+	<thead>
+		<tr>
+	      <th>Full Name </th>
+	      <th>Email </th>
+	      <th>Phone </th>
+	      <th>Location</th>
+	      <th>Stage</th>
+	      <th>Managed_by</th>
+	      <th>Action</th>
+		</tr>
+	</thead>
+	<tbody>
+	<% @prospects.each do |prospect| %>
+	<tr>
+	<td><%= prospect.full_name %></td>
+	<td><%= prospect.email %></td>
+	<td><%= prospect.phone %></td>
+	<td><%= prospect.location %></td>
+	<td><%= prospect.stage.name %></td>
+	<td><%= prospect.user.full_name %></td>
+	<td><%= link_to 'show', prospect %></td>
+	
+	</tr>
+	 <%end%>
+	
+	</tbody>
+	</table>
+	
+ </div>
+
+  <div class="col-md-4">
+     <div class="page-header">
+      <h2> ADDING PROSPECTS</h2>
+     </div>
+    <% if can? :create, @prospect %>
+    <div id="errorMsg" ></div>
+    	<%= render "form" %>
+    <%end%>
+
+   
+  </div>
+
+
+
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+      $('#prospectList').DataTable();
+	});
+</script>
+
+

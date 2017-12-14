@@ -1,13 +1,26 @@
-Full Name :<%= @prospect.full_name %></br>
-Email :<%= @prospect.email %></br>
-Phone : <%= @prospect.phone %></br>
-Location : <%= @prospect.location %></br>
-Stage <%= @prospect.stage.name %></br>
-Managed_by :<%= @prospect.managed_by %></br>
-<% if can? :update, @prospect %>
-<%= link_to 'Edit', edit_prospect_path(@prospect.id) %>
-<%end%>
-<% if can? :destroy, @prospect %>
-<%= link_to 'Destroy', @prospect, method: :delete, data: { confirm: 'Are you sure?' } %>
-<% end %>
-<%= link_to 'Back', prospects_path %>
+
+<div class= "row">
+    <div class="col-md-8">
+       <div class="page-header">
+       <h2><%= @prospect.full_name %>
+       	<% if can? :update, @prospect %>
+		<%= link_to 'Edit', edit_prospect_path(@prospect.id),class: "btn btn-info pull-right"   %>
+		<%end%>
+		<% if can? :destroy, @prospect %>
+		<%= link_to 'Destroy', @prospect, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger pull-right" %>
+		<% end %>
+       </h2>
+       </div>
+        Email :<%= @prospect.email %></br>
+		Phone : <%= @prospect.phone %></br>
+		Location : <%= @prospect.location %></br>
+		Stage <%= @prospect.stage.name %></br>
+		Managed_by :<%= @prospect.managed_by %></br>
+
+		<%= link_to prospects_path,class: "btn btn-danger" do %>
+		<i class="glyphicon glyphicon-menu-left"></i>Back
+		<%end%>
+
+    </div>
+</div>
+

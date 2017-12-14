@@ -1,11 +1,44 @@
-<h2>Listing stages</h2>
-<% @stages.each do |stage| %>
-Name : <%= stage.name %></br>
-Description : <%= stage.description %></br>
-Interest_Level : <%= stage.interest_level %></br>
-<%= link_to "show", stage %></br>
+<div class="row">
+  <div class="col-md-8">
+    <div class= "page-header">
+      <h2>Listing stages</h2>
+    </div>
+    <table class="table table-boredered">
+    	<thead>
+    		<tr>
+             <th>Name </th>
+             <th>Description</th>
+             <th>Interest_Level </th>
+             <th>Action</th>
+    		</tr>
 
-<%end%>
-<% if can? :create, Stage.new %>
-<%= link_to "ADD Stages", new_stage_path %>
-<%end%>
+    	</thead>
+        <tbody>
+           <% @stages.each do |stage| %>
+           <tr>
+              <th> <%= stage.name %></th>
+              <th><%= stage.description %></th>
+               <th><%= stage.interest_level %></th>
+               <th><%= link_to "show", stage %></th>
+
+           </tr>
+           <%end%>
+
+        </tbody>
+    </table>
+  </div>
+
+		 <div class="col-md-4">
+		    <div class= "page-header">
+		       <h2>ADD Stages</h2>
+		    </div>
+
+		<% if can? :create, Stage.new %>
+		<%= link_to "ADD Stages", new_stage_path, class:"btn btn-primary" %>
+		<%end%>
+		</div>
+
+</div>
+
+
+
